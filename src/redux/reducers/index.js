@@ -3,12 +3,14 @@
  */
 import {combineReducers} from 'redux';
 import app from './app-reducer';
+import game from './game-reducer';
 import router from './router-reducer';
 import user from './user-reducer';
 
 // Combine all
 const appReducer = combineReducers({
   app,
+  game,
   router,
   user,
 });
