@@ -27,14 +27,14 @@ const styles = StyleSheet.create({
   },
   letterText: {
     textAlign: 'center',
-    fontSize: AppFonts.t18.size,
+    fontSize: AppFonts.t22.size,
     fontWeight: 'bold',
     color: AppColors.palette.main.tertiary,
   },
   text: {
     flex: 1,
     paddingHorizontal: 5,
-    fontSize: AppFonts.t18.size,
+    fontSize: AppFonts.t20.size,
     fontWeight: 'bold',
     color: AppColors.palette.main.primary,
   },
