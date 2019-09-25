@@ -41,7 +41,7 @@ export function* loginSaga(action) {
     }
     yield put({type: AppConstants.EVENTS.LOGIN_REDUX, payload: action.payload});
     // Redirect
-    // Actions.reset(AppConstants.ROUTES.HOME);
+    Actions.reset(AppConstants.ROUTES.HOME);
   } catch (error) {
     console.log('error', error);
     showAlert('Wrong mail or password', 'Error');
