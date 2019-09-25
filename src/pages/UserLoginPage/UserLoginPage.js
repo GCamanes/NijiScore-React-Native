@@ -95,13 +95,11 @@ class UserLoginPage extends Component {
           {loadingStatus.loading && (
             <ActivityIndicator
               size="large"
-              color={AppColors.palette.main.quaternary}
+              color={AppColors.palette.white}
               style={{height: 40}}
             />
           )}
-          {!loadingStatus.loading && (
-            <Text style={styles.loginText}>GO !</Text>
-          )}
+          {!loadingStatus.loading && <Text style={styles.loginText}>GO !</Text>}
         </TouchableOpacity>
       </View>
     );

@@ -29,7 +29,7 @@ class AppContainer extends Component {
 
     return (
       <Fragment>
-        <StatusBar barStyle="light-content" backgroundColor={AppColors.palette.black}/>
+        <StatusBar barStyle="light-content" backgroundColor={AppColors.palette.main.secondary}/>
         <SafeAreaView style={{flex: 0, backgroundColor: AppColors.palette.black}} />
         <SafeAreaView style={{flex: 1, backgroundColor: AppColors.palette.black}}>
           {/* Main content */}
