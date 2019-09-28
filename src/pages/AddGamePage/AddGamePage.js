@@ -1,9 +1,10 @@
 import PropTypes from 'prop-types';
 import React, {Component} from 'react';
-import {ActivityIndicator, Switch, Text, TextInput, View} from 'react-native';
+import {ActivityIndicator, ScrollView, Switch, Text, TextInput, View} from 'react-native';
 import {connect} from 'react-redux';
 
 import AppConstants from '../../app/app.constants';
+import NumberSelector from '../../components/NumberSelector';
 import styles from './addGamePage.styles';
 import {AppColors, AppSizes, AppStyles} from '../../theme';
 
@@ -12,6 +13,7 @@ class AddGamePage extends Component {
     super(props);
     this.state = {
       maxPlayers: 1,
+      maxPoints: 1,
       maxWinners: 1,
       minPlayers: 1,
       name: '',
@@ -30,6 +32,7 @@ class AddGamePage extends Component {
       minPlayers,
       name,
       pointsCount,
+      maxPoints,
     } = this.state;
 
     if (loadingStatus.loading) {
@@ -45,7 +48,7 @@ class AddGamePage extends Component {
 
     return (
       <View style={styles.container}>
-        <View style={styles.nameView}>
+        <View style={styles.blueView}>
           <TextInput
             value={this.state.name}
             onChangeText={name => this.setState({name})}
@@ -54,43 +57,82 @@ class AddGamePage extends Component {
             style={styles.input}
           />
         </View>
-        <View style={styles.partView}>
-          <View style={styles.leftView} />
-          <Text>
-            Minimum number of players
-          </Text>
-        </View>
-        <View style={styles.partView}>
-          <View style={styles.leftView} />
-          <Text>
-            Maximum number of players
-          </Text>
-        </View>
-        <View style={styles.partView}>
-          <View style={styles.leftView} />
-          <Text>
-            Minimum number of winners
-          </Text>
-        </View>
-        <View style={styles.partView}>
-          <View style={styles.leftView} />
-          <Text>
-            Points count per player :
-          </Text>
-          <Switch
-            onValueChange={this.onTogglePointsCount}
-            value={this.state.pointsCount}
-            trackColor={{true: AppColors.palette.main.primary}}
-            thumbColor={AppColors.palette.main.quaternary}
+        <ScrollView>
+          <View style={styles.partView}>
+            <View style={styles.leftView} />
+            <Text style={styles.text}>
+              Minimum number of players
+            </Text>
+            <View style={styles.rightView} />
+          </View>
+          <NumberSelector
+            number={minPlayers}
+            minusAvailable={minPlayers > 2}
+            plusAvailable
           />
+
+          <View style={styles.partView}>
+            <View style={styles.leftView} />
+            <Text style={styles.text}>
+              Maximum number of players
+            </Text>
+            <View style={styles.rightView} />
+          </View>
+          <NumberSelector
+            number={maxPlayers}
+            minusAvailable={maxPlayers > minPlayers}
+            plusAvailable
+          />
+
+          <View style={styles.partView}>
+            <View style={styles.leftView} />
+            <Text style={styles.text}>
+              Maximum number of winners
+            </Text>
+            <View style={styles.rightView} />
+          </View>
+          <NumberSelector
+            number={maxWinners}
+            minusAvailable={maxWinners > 1}
+            plusAvailable
+          />
+
+          <View style={styles.partView}>
+            <View style={styles.leftView} />
+            <Text style={styles.text}>
+              Points count per player :
+            </Text>
+            <View style={styles.rightView} />
+          </View>
+          <View style={{flex: 1, alignItems: 'center'}}>
+            <Switch
+              onValueChange={this.onTogglePointsCount}
+              value={this.state.pointsCount}
+              trackColor={{true: AppColors.palette.main.primary}}
+              thumbColor={AppColors.palette.main.quaternary}
+            />
+          </View>
+
+          {pointsCount && (
+            <View>
+              <View style={styles.partView}>
+                <View style={styles.leftView} />
+                <Text style={styles.text}>
+                  Maximum number of points per victory 
+                </Text>
+                <View style={styles.rightView} />
+              </View>
+              <NumberSelector
+                number={maxPoints}
+                minusAvailable={maxPoints > 1}
+                plusAvailable
+              />
+            </View>
+          )}
+        </ScrollView>
+        <View style={styles.blueView}>
+
         </View>
-
-        {pointsCount && (
-          <Text>
-            Maximum number of points per victory 
-          </Text>
-        )}
-
       </View>
     );
   }

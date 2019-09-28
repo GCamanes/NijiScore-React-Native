@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: AppColors.palette.white,
   },
-  nameView: {
+  blueView: {
     alignItems: 'center',
     justifyContent: 'center',
     paddingVertical: 15,
@@ -25,12 +25,13 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     fontSize: AppFonts.t16.size,
     textAlignVertical: 'center',
+    textAlign: 'center',
   },
   partView: {
     marginVertical: 10,
     flexDirection: 'row',
     alignItems: 'center',
-    width: AppSizes.screen.widthThreeQuarters,
+    width: AppSizes.screen.width,
     backgroundColor: AppColors.palette.white,
   },
   leftView: {
@@ -40,6 +41,18 @@ const styles = StyleSheet.create({
     marginRight: 10,
     borderBottomRightRadius: 5,
     borderTopRightRadius: 5
+  },
+  rightView: {
+    width: 20,
+    height: 45,
+    backgroundColor: AppColors.palette.main.tertiary,
+    marginLeft: 10,
+    borderBottomLeftRadius: 5,
+    borderTopLeftRadius: 5
+  },
+  text: {
+    flex: 1,
+    textAlign: 'center',
   },
 });
 
