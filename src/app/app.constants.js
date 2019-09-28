@@ -33,6 +33,7 @@ const AppConstants = {
     HOME: 'home',
     USER_LOGIN: 'user_login',
     ALL_GAMES: 'all_games',
+    ADD_GAME: 'add_game',
   },
 };
 

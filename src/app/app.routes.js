@@ -4,6 +4,7 @@
 import React from 'react';
 import {Actions, Scene} from 'react-native-router-flux';
 import AddGameButton from '../components/AddGameButton';
+import AddGamePage from '../pages/AddGamePage/AddGamePage';
 import AppConfig from './app.config';
 import AppConstants from './app.constants';
 import HomePage from '../pages/HomePage/HomePage';
@@ -13,6 +14,11 @@ import UserLoginPage from '../pages/UserLoginPage/UserLoginPage';
 /* Routes */
 const AppRoutes = Actions.create(
   <Scene key="root" {...AppConfig.sceneProps}>
+    <Scene
+      key={AppConstants.ROUTES.ADD_GAME}
+      title="Add game"
+      component={AddGamePage}
+    />
     <Scene
       key={AppConstants.ROUTES.HOME}
       title="All games"

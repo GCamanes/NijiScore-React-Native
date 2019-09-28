@@ -2,9 +2,9 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Image, StyleSheet, TouchableOpacity} from 'react-native';
 import assets from '../assets';
-import * as GameActions from '../redux/actions/game-actions';
 import {AppSizes} from '../theme';
-import PropTypes from 'prop-types';
+import { Actions } from 'react-native-router-flux';
+import AppConstants from '../app/app.constants';
 
 const styles = StyleSheet.create({
   addGameView: {
@@ -17,17 +17,10 @@ const styles = StyleSheet.create({
   },
 });
 
-const AddGameButton = ({goToAddGamePage}) => (
-  <TouchableOpacity style={styles.addGameView} onPress={() => goToAddGamePage()}>
+const AddGameButton = () => (
+  <TouchableOpacity style={styles.addGameView} onPress={() => Actions.jump(AppConstants.ROUTES.ADD_GAME)}>
     <Image source={assets.plus} style={styles.image} />
   </TouchableOpacity>
 );
 
-AddGameButton.propTypes = {
-  goToAddGamePage: PropTypes.func.isRequired,
-};
-
-export default connect(
-  null,
-  GameActions,
-)(AddGameButton);
+export default AddGameButton;
