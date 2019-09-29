@@ -12,11 +12,12 @@ const styles = StyleSheet.create({
     width: AppSizes.screen.width,
     alignItems: 'center',
     justifyContent: 'center',
-    margin: 5,
+    marginTop: 5,
+    marginBottom: 15,
   },
   image: {
-    height: AppSizes.screen.width * 0.09,
-    width: AppSizes.screen.width * 0.09,
+    height: AppSizes.screen.width * 0.11,
+    width: AppSizes.screen.width * 0.11,
   },
   text: {
     width: AppSizes.screen.widthThird,
@@ -26,10 +27,10 @@ const styles = StyleSheet.create({
   },
 });
 
-const NumberSelector = ({minusAvailable, number, onMinusPress, onPlusPress, plusAvailable}) => (
+const NumberSelector = ({changedState, minusAvailable, number, onMinusPress, onPlusPress, plusAvailable}) => (
   <View style={styles.container}>
     {minusAvailable && (
-      <TouchableOpacity onPress={onMinusPress}>
+      <TouchableOpacity onPress={() => onMinusPress(changedState)}>
         <Image source={assets.minus} style={styles.image} />
       </TouchableOpacity>
     )}
@@ -40,7 +41,7 @@ const NumberSelector = ({minusAvailable, number, onMinusPress, onPlusPress, plus
       {number}
     </Text>
     {plusAvailable && (
-      <TouchableOpacity onPress={onPlusPress}>
+      <TouchableOpacity onPress={() => onPlusPress(changedState)}>
         <Image source={assets.plus} style={styles.image} />
       </TouchableOpacity>
     )}
@@ -51,6 +52,7 @@ const NumberSelector = ({minusAvailable, number, onMinusPress, onPlusPress, plus
 );
 
 NumberSelector.propTypes = {
+  changedState: PropTypes.string.isRequired,
   minusAvailable: PropTypes.bool,
   number: PropTypes.number.isRequired,
   onMinusPress: PropTypes.func,

@@ -12,13 +12,29 @@ class AddGamePage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      maxPlayers: 1,
+      maxPlayers: 2,
       maxPoints: 1,
       maxWinners: 1,
-      minPlayers: 1,
+      minPlayers: 2,
       name: '',
       pointsCount: false,
     };
+  }
+
+  onMinusPress = (changedState) => {
+    this.setState({[changedState]: this.state[changedState] - 1});
+  }
+
+  onPlusPress = (changedState) => {
+    const {minPlayers, maxPlayers} = this.state;
+    if (changedState === 'minPlayers' && minPlayers + 1 > maxPlayers) {
+      this.setState({
+        minPlayers: minPlayers + 1,
+        maxPlayers: minPlayers + 1,
+      });
+    } else {
+      this.setState({[changedState]: this.state[changedState] + 1});
+    }
   }
 
   onTogglePointsCount = value => {
@@ -68,6 +84,9 @@ class AddGamePage extends Component {
           <NumberSelector
             number={minPlayers}
             minusAvailable={minPlayers > 2}
+            onMinusPress={this.onMinusPress}
+            onPlusPress={this.onPlusPress}
+            changedState="minPlayers"
             plusAvailable
           />
 
@@ -81,6 +100,9 @@ class AddGamePage extends Component {
           <NumberSelector
             number={maxPlayers}
             minusAvailable={maxPlayers > minPlayers}
+            onMinusPress={this.onMinusPress}
+            onPlusPress={this.onPlusPress}
+            changedState="maxPlayers"
             plusAvailable
           />
 
@@ -94,7 +116,10 @@ class AddGamePage extends Component {
           <NumberSelector
             number={maxWinners}
             minusAvailable={maxWinners > 1}
-            plusAvailable
+            onMinusPress={this.onMinusPress}
+            onPlusPress={this.onPlusPress}
+            changedState="maxWinners"
+            plusAvailable={maxWinners < maxPlayers - 1}
           />
 
           <View style={styles.partView}>
@@ -104,12 +129,12 @@ class AddGamePage extends Component {
             </Text>
             <View style={styles.rightView} />
           </View>
-          <View style={{flex: 1, alignItems: 'center'}}>
+          <View style={{flex: 1, alignItems: 'center', marginTop: 5, marginBottom: 15,}}>
             <Switch
               onValueChange={this.onTogglePointsCount}
               value={this.state.pointsCount}
-              trackColor={{true: AppColors.palette.main.primary}}
-              thumbColor={AppColors.palette.main.quaternary}
+              trackColor={{true: AppColors.palette.main.quaternary}}
+              thumbColor={AppColors.palette.main.tertiary}
             />
           </View>
 
@@ -125,6 +150,9 @@ class AddGamePage extends Component {
               <NumberSelector
                 number={maxPoints}
                 minusAvailable={maxPoints > 1}
+                onMinusPress={this.onMinusPress}
+                onPlusPress={this.onPlusPress}
+                changedState="maxPoints"
                 plusAvailable
               />
             </View>

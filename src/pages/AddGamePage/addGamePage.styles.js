@@ -52,7 +52,10 @@ const styles = StyleSheet.create({
   },
   text: {
     flex: 1,
+    fontSize: AppFonts.t16.size,
+    fontWeight: 'bold',
     textAlign: 'center',
+    color: AppColors.palette.main.tertiary,
   },
 });
 
