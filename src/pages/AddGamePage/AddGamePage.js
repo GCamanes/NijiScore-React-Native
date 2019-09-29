@@ -1,12 +1,24 @@
 import PropTypes from 'prop-types';
 import React, {Component} from 'react';
-import {ActivityIndicator, ScrollView, Switch, Text, TextInput, View} from 'react-native';
+import {
+  ActivityIndicator,
+  Image,
+  ScrollView,
+  Switch,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import {connect} from 'react-redux';
 
 import AppConstants from '../../app/app.constants';
 import NumberSelector from '../../components/NumberSelector';
+import assets from '../../assets';
+import showAlert from '../../utils/showAlert';
 import styles from './addGamePage.styles';
-import {AppColors, AppSizes, AppStyles} from '../../theme';
+import * as GameActions from '../../redux/actions/game-actions';
+import {AppColors, AppStyles} from '../../theme';
 
 class AddGamePage extends Component {
   constructor(props) {
@@ -39,6 +51,15 @@ class AddGamePage extends Component {
 
   onTogglePointsCount = value => {
     this.setState({pointsCount: value});
+  };
+
+  addGame = () => {
+    const {addGame, connectivity} = this.props;
+    if (connectivity) {
+      (this.state.name.length > 0) ? addGame(this.state) : showAlert('Please enter a game name');
+    } else {
+      showAlert('No internet conenction');
+    }
   };
 
   render() {
@@ -158,8 +179,10 @@ class AddGamePage extends Component {
             </View>
           )}
         </ScrollView>
-        <View style={styles.blueView}>
-
+        <View style={styles.bottomView}>
+          <TouchableOpacity style={styles.playTouchableView} onPress={this.addGame}>
+            <Text style={styles.textPlay}>Add this game</Text>
+          </TouchableOpacity>
         </View>
       </View>
     );
@@ -183,5 +206,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  null,
+  GameActions,
 )(AddGamePage);

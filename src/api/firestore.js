@@ -18,7 +18,16 @@ class FirestoreService {
         showPoints: item._data.showPoints,
       };
     });
-    return games;
+    return games.sort((a, b) =>
+      a.name > b.name ? 1 : b.name > a.name ? -1 : 0,
+    );
+  }
+
+  static async addGame(game) {
+    await firebase
+    .firestore()
+    .collection(AppConstants.FIRESTORE.GAMES_COLLECTION)
+    .add(game);
   }
 }
 

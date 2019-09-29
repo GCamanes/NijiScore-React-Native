@@ -12,8 +12,7 @@ const styles = StyleSheet.create({
     width: AppSizes.screen.width,
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 5,
-    marginBottom: 15,
+    marginVertical: 5,
   },
   image: {
     height: AppSizes.screen.width * 0.11,

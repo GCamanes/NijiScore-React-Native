@@ -16,7 +16,7 @@ const AppRoutes = Actions.create(
   <Scene key="root" {...AppConfig.sceneProps}>
     <Scene
       key={AppConstants.ROUTES.ADD_GAME}
-      title="Add game"
+      title="Adding game"
       component={AddGamePage}
     />
     <Scene

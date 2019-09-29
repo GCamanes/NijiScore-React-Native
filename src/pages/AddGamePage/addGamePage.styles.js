@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
   blueView: {
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: 15,
+    paddingVertical: 10,
     backgroundColor: AppColors.palette.main.quaternary,
   },
   input: {
@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   partView: {
-    marginVertical: 10,
+    marginVertical: 5,
     flexDirection: 'row',
     alignItems: 'center',
     width: AppSizes.screen.width,
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
   },
   leftView: {
     width: 20,
-    height: 45,
+    height: 35,
     backgroundColor: AppColors.palette.main.tertiary,
     marginRight: 10,
     borderBottomRightRadius: 5,
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
   },
   rightView: {
     width: 20,
-    height: 45,
+    height: 35,
     backgroundColor: AppColors.palette.main.tertiary,
     marginLeft: 10,
     borderBottomLeftRadius: 5,
@@ -56,6 +56,29 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     color: AppColors.palette.main.tertiary,
+  },
+  bottomView: {
+    width: AppSizes.screen.width,
+    backgroundColor: AppColors.palette.white,
+    alignItems: 'center',
+  },
+  playTouchableView: {
+    flexDirection: 'row',
+    width: AppSizes.screen.widthHalf,
+    height: AppSizes.screen.width * 0.15,
+    margin: 5,
+    paddingHorizontal: 4,
+    alignItems: 'center',
+    backgroundColor: AppColors.palette.main.quaternary,
+    borderRadius: 50,
+    borderColor: AppColors.palette.main.tertiary,
+    borderWidth: 2,
+  },
+  textPlay: {
+    flex: 1,
+    color: AppColors.palette.main.primary,
+    fontSize: AppFonts.t16.size,
+    textAlign: 'center',
   },
 });
 
