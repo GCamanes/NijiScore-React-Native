@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React, {Component} from 'react';
+import { Actions } from 'react-native-router-flux';
 import {ActivityIndicator, ScrollView, Text, View} from 'react-native';
 import {connect} from 'react-redux';
 
@@ -17,6 +18,14 @@ class HomePage extends Component {
   componentDidMount() {
     const {initHomePage} = this.props;
     initHomePage();
+  }
+
+  onGamePress = game => {
+    console.log('GAME CLICKED', game.name);
+  }
+
+  onGameLongPress = game => {
+    Actions.jump(AppConstants.ROUTES.ADD_GAME, {game, title: 'Updating game'});
   }
 
   /**
@@ -38,7 +47,7 @@ class HomePage extends Component {
       <View style={styles.homeView}>
         <ScrollView style={styles.scoresView}>
           {games.map(game => (
-            <GameTile game={game} key={game.name} />
+            <GameTile game={game} key={game.name} onPress={this.onGamePress} onLongPress={this.onGameLongPress}/>
           ))}
         </ScrollView>
       </View>

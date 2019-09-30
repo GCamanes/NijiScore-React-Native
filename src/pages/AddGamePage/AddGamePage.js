@@ -19,17 +19,19 @@ import showAlert from '../../utils/showAlert';
 import styles from './addGamePage.styles';
 import * as GameActions from '../../redux/actions/game-actions';
 import {AppColors, AppStyles} from '../../theme';
+import { updateGame } from '../../redux/actions/game-actions';
 
 class AddGamePage extends Component {
   constructor(props) {
     super(props);
+    const {game} = props;
     this.state = {
-      maxPlayers: 2,
-      maxPoints: 1,
-      maxWinners: 1,
-      minPlayers: 2,
-      name: '',
-      pointsCount: false,
+      maxPlayers: game ? game.maxPlayers : 2,
+      maxPoints: game ? game.maxPoints : 1,
+      maxWinners: game ? game.maxWinners : 1,
+      minPlayers: game ? game.minPlayers : 2,
+      name: game ? game.name : '',
+      pointsCount: game ? game.pointsCount : false,
     };
   }
 
@@ -54,17 +56,22 @@ class AddGamePage extends Component {
   };
 
   addGame = () => {
-    const {addGame, connectivity} = this.props;
+    const {addGame, connectivity, game, updateGame} = this.props;
     if (connectivity) {
-      (this.state.name.length > 0) ? addGame(this.state) : showAlert('Please enter a game name');
+      if (this.state.name.length > 0) {
+        game ? updateGame(this.state, game.id) : addGame(this.state);
+      } else {
+        showAlert('Please enter a game name');
+      }
     } else {
-      showAlert('No internet conenction');
+      showAlert('No internet connection');
     }
   };
 
   render() {
-    const {loadingStatus} = this.props;
-    const {maxPlayers,
+    const {loadingStatus, game} = this.props;
+    const {
+      maxPlayers,
       maxWinners,
       minPlayers,
       name,
@@ -87,7 +94,7 @@ class AddGamePage extends Component {
       <View style={styles.container}>
         <View style={styles.blueView}>
           <TextInput
-            value={this.state.name}
+            value={name}
             onChangeText={name => this.setState({name})}
             placeholder="Name of the game"
             selectionColor={AppColors.palette.main.secondary}
@@ -164,7 +171,7 @@ class AddGamePage extends Component {
               <View style={styles.partView}>
                 <View style={styles.leftView} />
                 <Text style={styles.text}>
-                  Maximum number of points per victory 
+                  Maximum number of points per victory
                 </Text>
                 <View style={styles.rightView} />
               </View>
@@ -181,7 +188,7 @@ class AddGamePage extends Component {
         </ScrollView>
         <View style={styles.bottomView}>
           <TouchableOpacity style={styles.playTouchableView} onPress={this.addGame}>
-            <Text style={styles.textPlay}>Add this game</Text>
+            <Text style={styles.textPlay}>{game ? 'Update game' : 'Add game'}</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -192,10 +199,13 @@ class AddGamePage extends Component {
 AddGamePage.propTypes = {
   connectivity: PropTypes.bool.isRequired,
   addGame: PropTypes.func.isRequired,
+  game: PropTypes.object,
   loadingStatus: PropTypes.object,
+  updateGame: PropTypes.func.isRequired,
 };
 
 AddGamePage.defaultProps = {
+  game: null,
   loadingStatus: {loading: false},
 };
 

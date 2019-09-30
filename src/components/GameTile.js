@@ -46,9 +46,14 @@ const styles = StyleSheet.create({
 
 export class GameTile extends Component {
   render() {
-    const {game, onPress} = this.props;
+    const {game, onPress, onLongPress} = this.props;
     return (
-      <TouchableOpacity style={styles.touchableGameView} onPress={onPress}>
+      <TouchableOpacity
+        style={styles.touchableGameView}
+        onPress={() => onPress(game)}
+        onLongPress={() => onLongPress(game)}
+        delayLongPress={2000}
+      >
         <View style={styles.letterView}>
           <Text style={styles.letterText}>{game.name[0].toUpperCase()}</Text>
         </View>
@@ -62,6 +67,7 @@ export class GameTile extends Component {
 GameTile.propTypes = {
   game: PropTypes.object.isRequired,
   onPress: PropTypes.func.isRequired,
+  onLongPress: PropTypes.func.isRequired,
 };
 
 export default GameTile;

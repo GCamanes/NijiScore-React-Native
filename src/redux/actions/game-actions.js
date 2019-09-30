@@ -6,3 +6,11 @@ export function addGame(game) {
     payload: game,
   };
 }
+
+export function updateGame(game, id) {
+  return {
+    type: AppConstants.EVENTS.UPDATE_GAME_SAGA,
+    payload: game,
+    id,
+  };
+}
